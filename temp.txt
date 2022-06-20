@@ -2,3 +2,52 @@ imgpkg copy -i projects.registry.vmware.com/tkg/kapp-controller:v0.25.0_vmware.1
 imgpkg copy -b projects.registry.vmware.com/tkg/packages/standard/repo:v1.4.0 --to-repo=harbor1.wizards.lab/tbs-test/repo --registry-ca-cert-path /etc/docker/certs.d/harbor1.wizards.lab/ca.crt
 
 imgpkg copy -b registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle@sha256:ab0a3539da241a6ea59c75c0743e9058511d7c56312ea3906178ec0f3491f51d --to-repo harbor1.wizards.lab/tbs-test/tanzu-cluster-essentials/bundle  --registry-ca-cert-path /etc/docker/certs.d/harbor1.wizards.lab/ca.crt
+
+
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kapp-controller-config
+  namespace: tkg-system
+  annotations:
+    kapp.k14s.io/change-group: apps.kappctrl.k14s.io/kapp-controller-config
+data:
+  caCerts: |
+    -----BEGIN CERTIFICATE-----
+    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
+    HZSs
+    -----END CERTIFICATE-----
+  httpProxy: ""
+  httpsProxy: ""
+  noProxy: ""
+  dangerousSkipTLSVerify: ""
